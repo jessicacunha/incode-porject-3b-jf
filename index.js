@@ -5,14 +5,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 var crypto = require('crypto');
-var exphbs  = require('express-handlebars');
 
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-
-app.get('/', function (req, res) {
-    res.render('home',{layout: false});
-});
 
 
 app.get("/", (req, res) => {
