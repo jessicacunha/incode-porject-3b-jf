@@ -11,7 +11,7 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
-    res.render('home');
+    res.render('home',{layout: false});
 });
 
 
