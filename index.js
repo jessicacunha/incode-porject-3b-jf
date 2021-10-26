@@ -1,15 +1,18 @@
 var express = require("express");
 var app = express();
 var data = require("./data");
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-var crypto = require('crypto');
+var crypto = require("crypto");
 
-
+//app.use(express.static())
+//app.engine(.mus);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to our schedule website");
+  res.render('home', {
+    name: users[0],
+  });
 });
 
 app.get("/users", (req, res) => {
@@ -38,19 +41,18 @@ app.get("/users/:userId/schedules", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
- 
-  var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
+  var hash = crypto
+    .createHash("sha256")
+    .update(req.body.password)
+    .digest("base64");
   var newUser = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
-    password: hash
+    password: hash,
   };
   data.users.push(newUser);
   res.send(newUser);
-
 });
 
 app.listen(3000, function () { });
-
-
