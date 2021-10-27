@@ -15,8 +15,14 @@ app.engine('handlebars', handlebars({
 }));
 
 app.get('/', (req, res) => {
-  res.render('hp', {layout: 'index'})
-})
+  //load home page
+  console.log('users[0]', users[0]);
+  res.render('home,' {
+    email: users[0].email,
+    name: users[0].firstname,
+  });
+  //res.render('hp', {layout: 'index'})
+});
 
 app.get('/users', (req, res) => {
   let usersData = data.users
@@ -25,17 +31,18 @@ app.get('/users', (req, res) => {
 
 app.get('/schedules', (req, res) => {
   res.render('schedules', {layout: 'index'})
-})
+});
 
 //Post Routes user
-app.post('/users/new', (req, res) => {
-  
-})
+app.post('/user/new', isLoggedIn, (req, res) => {
+  res.redirect('/');
+ 
+});
 
 //Post Routes Schedules
 app.post('/schedules/new', (req, res) => {
   
-})
+});
 
 app.get("/users/:id", (req, res) => {
   let id = req.params.id;
