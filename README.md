@@ -1,3 +1,3 @@
 # incode-project-3b-jf
 
-# Authors: Jessica
+# Authors: Jessica, Pad, Gabriel
