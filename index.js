@@ -14,7 +14,6 @@ app.engine('handlebars', handlebars({
   layoutsDir: __dirname + '/views/layouts',
 }));
 
-
 app.get('/', (req, res) => {
   res.render('hp', {layout: 'index'})
 })
@@ -26,6 +25,16 @@ app.get('/users', (req, res) => {
 
 app.get('/schedules', (req, res) => {
   res.render('schedules', {layout: 'index'})
+})
+
+//Post Routes user
+app.post('/users/new', (req, res) => {
+  
+})
+
+//Post Routes Schedules
+app.post('/schedules/new', (req, res) => {
+  
 })
 
 app.get("/users/:id", (req, res) => {
