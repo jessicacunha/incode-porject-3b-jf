@@ -1,3 +1,3 @@
-# incode-project-3b-jf
+# incode-project-3-Jessica
 
-# Authors: Jessica
+author: Jessica

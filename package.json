@@ -1,16 +1,28 @@
 {
-  "name": "incode-project-3-jf",
+  "name": "incode-project-3-samer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Schedule Website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index"
   },
-  "author": "Jessica Fontes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfarasamer/incode-project-3-Samer.git"
+  },
+  "author": "Samer Al Fara",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfarasamer/incode-project-3-Samer/issues"
+  },
+  "homepage": "https://github.com/alfarasamer/incode-project-3-Samer#readme",
   "dependencies": {
-    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
   }
 }
