@@ -1,0 +1,51 @@
+{{{body}}}
+<div class="container">
+
+  <h1 class="text-center">{{pageTitle}}</h1>
+
+  <form action="/schedules/new" method="post">
+
+    <div class="mb-3">
+      <select class="form-select" aria-label="Default select example" name="name">
+        <option selected>Select a user</option>
+
+        {{#each users}}
+        <option value={{this.firstname}},{{this.lastname}}>{{this.firstname}} {{this.lastname}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="mb-3">
+      <select class="form-select" aria-label="Default select example" name="day">
+        <option selected>Day</option>
+        <option value="1">Mon</option>
+        <option value="2">Tue</option>
+        <option value="3">Wed</option>
+        <option value="4">Thu</option>
+        <option value="5">Fri</option>
+        <option value="6">Sat</option>
+        <option value="7">Sun</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select class="form-select" aria-label="Default select example" name="start_at">
+        <option selected>Start</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select class="form-select" aria-label="Default select example" name="end_at">
+        <option selected>End</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-outline-secondary">Send</button>
+  </form>
+</div>
