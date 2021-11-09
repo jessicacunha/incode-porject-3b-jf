@@ -13,7 +13,8 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  database: 'incode_project_3'
+  database: 'incode_project_3',
+  password: 'root'
 });
 
 connection.connect(function (err) {
@@ -38,19 +39,19 @@ connection.connect(function (err) {
   );
   app.use(express.static("public"));
   app.get("/", (req, res) => {
-    res.render("main", { layout: "index" });
+    res.render("index");
   });
 
   app.get("/user", (req, res) => {
     let pageTitle = "All Users";
     let returnUser = users;
-    res.render("main", { layout: "users", returnUser, pageTitle });
+    res.render("users", { returnUser, pageTitle });
   });
 
   app.get("/schedules", (req, res) => {
     let pageTitle = "All Schedules";
     let returnedschedules = schedules;
-    res.render("main", { layout: "schedules", returnedschedules, pageTitle });
+    res.render("schedules", { returnedschedules, pageTitle });
   });
 
   app.get("/user/:userId", (req, res) => {
@@ -59,7 +60,7 @@ connection.connect(function (err) {
 
     if (userId >= users.length) {
       pageTitle = "User not found!";
-      res.render("main", { layout: "404", pageTitle });
+      res.render("404", { pageTitle });
     } else {
       let returnUser = [users[userId]];
       console.log(returnUser);
@@ -75,7 +76,7 @@ connection.connect(function (err) {
 
     if (userId >= users.length) {
       pageTitle = "User not found!";
-      res.render("main", { layout: "404", pageTitle });
+      res.render("404", { pageTitle });
     } else {
       userFirstName = Object.values(users[userId])[0];
       userLastName = Object.values(users[userId])[1];
@@ -128,7 +129,7 @@ connection.connect(function (err) {
 
   app.get("/users/new", (req, res) => {
     let pageTitle = "Create a new User"
-    res.render("main", { layout: "newUser", pageTitle });
+    res.render("newUser", { pageTitle });
   })
 
   app.post("/users/new", (req, res) => {
@@ -191,7 +192,7 @@ connection.connect(function (err) {
   app.get("/schedules/new", (req, res) => {
     let pageTitle = "Create a Schedule"
 
-    res.render("main", { layout: "newSchedule", pageTitle, users });
+    res.render("newSchedule", { pageTitle, users });
   })
 
 
