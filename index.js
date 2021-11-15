@@ -122,8 +122,6 @@ connection.connect(function (err) {
     newUser.password = hash;
     users.push(newUser);
     res.json(users);
-    console.log(typeof password);
-    console.log(typeof firstName);
     console.log(users);
   });
 
