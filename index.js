@@ -9,19 +9,19 @@ const { users, schedules } = require("./data");
 
 const PORT = process.env.PORT || 3000;
 
-const mysql = require('mysql2');
+const mysql = require("mysql2");
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'incode_project_3',
-  password: 'root'
+  host: "localhost",
+  user: "root",
+  database: "incode_project_3",
+  password: "root",
 });
 
 connection.connect(function (err) {
   if (err) {
-    throw err
+    throw err;
   } else {
-    console.log('Connected')
+    console.log("Connected");
   }
 
   app.listen(PORT, () => {
@@ -39,19 +39,27 @@ connection.connect(function (err) {
   );
   app.use(express.static("public"));
   app.get("/", (req, res) => {
-    res.render("index");
+    connection.query("Select * from users", (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      res.render("index", { result });
+    });
   });
 
   app.get("/user", (req, res) => {
-    let pageTitle = "All Users";
-    let returnUser = users;
-    res.render("users", { returnUser, pageTitle });
+    connection.query("Select * from users", (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      res.render("users", { result });
+    });
   });
 
   app.get("/schedules", (req, res) => {
-    let pageTitle = "All Schedules";
-    let returnedschedules = schedules;
-    res.render("schedules", { returnedschedules, pageTitle });
+    connection.query("Select * from schedules", (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      res.render("schedules", { result });
+    });
   });
 
   app.get("/user/:userId", (req, res) => {
@@ -97,7 +105,6 @@ connection.connect(function (err) {
   });
 
   app.post("/users", (req, res) => {
-
     const newUser = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
@@ -126,17 +133,16 @@ connection.connect(function (err) {
   });
 
   app.get("/users/new", (req, res) => {
-    let pageTitle = "Create a new User"
+    let pageTitle = "Create a new User";
     res.render("newUser", { pageTitle });
-  })
+  });
 
   app.post("/users/new", (req, res) => {
-    let pageTitle = "Create a new User"
+    let pageTitle = "Create a new User";
     const firstname = req.body.firstName;
     const lastname = req.body.lastName;
     const { email } = req.body;
     const { password } = req.body;
-
 
     var hash = crypto
       .createHash("sha256")
@@ -146,8 +152,8 @@ connection.connect(function (err) {
       firstname,
       lastname,
       email,
-      password
-    }
+      password,
+    };
 
     if (
       !newUser.firstname ||
@@ -162,8 +168,7 @@ connection.connect(function (err) {
     newUser.password = hash;
     users.push(newUser);
     res.redirect("/user");
-  })
-
+  });
 
   app.post("/schedules", (req, res) => {
     const newSchedule = {
@@ -186,21 +191,17 @@ connection.connect(function (err) {
     console.log(schedules);
   });
 
-
   app.get("/schedules/new", (req, res) => {
-    let pageTitle = "Create a Schedule"
+    let pageTitle = "Create a Schedule";
 
     res.render("newSchedule", { pageTitle, users });
-  })
-
-
+  });
 
   app.post("/schedules/new", (req, res) => {
-
     let user_id;
     let fullNameConcated = req.body.name;
 
-    const nameArr = fullNameConcated.split(',');
+    const nameArr = fullNameConcated.split(",");
     console.log(nameArr);
 
     for (let index = 0; index < users.length; index++) {
@@ -226,7 +227,5 @@ connection.connect(function (err) {
 
     schedules.push(newSchedule);
     res.redirect("/schedules");
-
   });
-
 });
